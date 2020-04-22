@@ -1,0 +1,12 @@
+div{
+    float: left;
+    text-align: center;
+    margin-top: 3%;
+}
+img{
+    height: 300px;
+  }
+#girl{
+    float:right;
+    width: 60%;
+}
