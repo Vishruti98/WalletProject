@@ -15,50 +15,57 @@ import com.project.app.entities.Transaction;
 import com.project.app.entities.Wallet;
 import com.project.app.service.ServiceImpl;
 
-@CrossOrigin(origins= "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("/api")
 public class WalletController {
-	
+
 	@Autowired
 	ServiceImpl serv;
-	
+
 	@PostMapping("/add")
-	public Wallet create(@RequestBody Wallet w)
-	{
+	public int create(@RequestBody Wallet w) {
 		return serv.create(w);
 	}
-	
+
 	@GetMapping("/get/{AccountNumber}")
-	public Wallet showBalance(@PathVariable Integer AccountNumber )
-	{
+	public double showBalance(@PathVariable Integer AccountNumber) {
 		return serv.showBalance(AccountNumber);
 	}
-	
-	/*
-	 * @GetMapping("/get") public Wallet showBalance() { return serv.showBalance();
-	 * }
-	 */
-	
+
+	@GetMapping("/getUser/{AccountNumber}")
+	public Wallet getUserById(@PathVariable Integer AccountNumber) {
+		return serv.getUserById(AccountNumber);
+	}
+
 	@GetMapping("/deposit/{accountNumber}/{amount}")
-	public Transaction deposit(@PathVariable int accountNumber,@PathVariable Double amount) {
-		return serv.deposit(accountNumber,amount);
+	public Transaction deposit(@PathVariable int accountNumber, @PathVariable Double amount) {
+		return serv.deposit(accountNumber, amount);
 	}
-	
+
 	@GetMapping("/withdraw/{accountNumber}/{amount}")
-	public Transaction withdraw(@PathVariable int accountNumber,@PathVariable Double amount) {
-		return serv.withdraw(accountNumber,amount);
+	public Transaction withdraw(@PathVariable int accountNumber, @PathVariable Double amount) {
+		return serv.withdraw(accountNumber, amount);
 	}
-	
+
 	@GetMapping("/transfer/{amount}/{acc1}/{acc2}")
-	public Transaction transfer(@PathVariable Double amount, @PathVariable Integer acc1,@PathVariable int acc2)
-	{
-		return serv.transfer(amount, acc1,acc2);
+	public Transaction transfer(@PathVariable Double amount, @PathVariable Integer acc1, @PathVariable int acc2) {
+		return serv.transfer(amount, acc1, acc2);
 	}
-	
+
 	@GetMapping("/print/{accountNumber}")
 	public List<Transaction> printAllTransaction(@PathVariable int accountNumber) {
 		return serv.printAllTransaction(accountNumber);
 	}
-	
+
+	@GetMapping("/validate/{password}/{accountNumber}")
+	public boolean validatePassword(@PathVariable String password, @PathVariable int accountNumber) {
+		return serv.validatePassword(password, accountNumber);
+	}
+
+	@GetMapping("/validateAccount/{accountNumber}")
+	public boolean validateAccount(@PathVariable int accountNumber) {
+		return serv.validateAccount(accountNumber);
+	}
+
 }

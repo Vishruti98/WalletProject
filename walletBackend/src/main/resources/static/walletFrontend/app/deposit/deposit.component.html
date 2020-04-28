@@ -1,0 +1,56 @@
+<div>
+  <br>
+<div class="container">
+  <form [formGroup]="depositForm" (ngSubmit)="deposit()" class='card p-3 bg-light' style="border:1px solid #ccc">
+    <h1 >Deposit</h1>
+    <p>Please fill in this form to deposit money in your account.</p>
+    <hr>
+    <br>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <label for="accountNumber"><b>Account Number:</b></label>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5">
+          <input type="number" class="form-control" formControlName="accountNumber" placeholder="Account Number">
+        </div>
+        <div *ngIf="submitted && depositForm.controls.accountNumber.errors" class="error">
+          <div class="text-danger" *ngIf="depositForm.controls.accountNumber.errors.required">
+            <font color="red">Account Number is required..</font>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <label for="balance"><b>Amount to be deposited:</b> </label>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5">
+          <input type="number" class="form-control" formControlName="balance" min="1" placeholder="Deposit Amount">
+        </div>
+        <div *ngIf="submitted && depositForm.controls.balance.errors" class="error">
+          <div class="text-danger" *ngIf="depositForm.controls.balance.errors.required">
+            <font color="red"> Amount is required..</font>
+          </div>
+          <div class="text-danger" *ngIf="depositForm.controls.balance.errors.min">
+            <font color="red"> Amount cannot be negative..</font>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="offset-lg-4 col-lg-4 offset-md-4 col-md-4 offset-sm-4 col-sm-4">
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+    <br>
+  </form>
+  <br>
+  <button class="btn btn-primary" (click)="do()" style="margin-left: 0px;">Back</button>
+</div>
+<div class="icon">
+  <img src="deposit.png" alt="Deposit" class="icon1" >
+</div>
+</div>

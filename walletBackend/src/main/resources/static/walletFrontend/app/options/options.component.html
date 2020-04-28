@@ -1,0 +1,41 @@
+
+<div class="topnav">
+  <div style="float: right; width: 10%;"> <a (click)="do()" class="active">Log Out</a></div>
+  <div style="float: right;"><h3> Welcome {{result?.username}}</h3></div>
+</div>
+
+<div class="option-body">
+  <div class="verticalmenu"> 
+    <div class="ad">
+      <img src="bankAd1.jpg" alt="">
+    </div>
+
+    <div class="btn-group">
+      <button style="background-color:lightseagreen;">SERVICES OFFERED</button>
+      <button><a class="nav-link" routerLink = "/new-deposit">Deposit</a></button>
+      <button><a class="nav-link"routerLink = "/new-withdraw">Withdraw</a></button>
+      <button><a class="nav-link" routerLink = "/new-transfer">Transfer</a></button>
+      <button> <a class="nav-link" routerLink = "/new-balance">Check Balance</a></button>
+      <button> <a class="nav-link" routerLink = "/new-transaction">Print Transaction</a></button>
+    </div>
+  </div>
+  <div class="info">
+    <div class="detail">
+      <br>
+      <h1 style="text-align: center;">User Details</h1>
+      <br>
+      <table class="table">
+            <tr><td>Account Number</td><td>:</td><td>{{result?.accountNumber}}</td></tr><br>
+            <tr><td>User Name</td><td>:</td><td>{{result?.username}}</td></tr><br>
+            <tr><td>Phone Number</td><td>:</td><td>{{result?.phoneNumber}}</td></tr><br>
+            <tr><td>Account Balance</td><td>:</td><td>&#8377; {{result?.balance}}/-</td></tr><br>
+      </table>
+    </div>
+    <div class="icon">
+      <img src="user1.png" alt="profile" class="icon1">
+    </div>
+  </div>
+
+</div>
+
+

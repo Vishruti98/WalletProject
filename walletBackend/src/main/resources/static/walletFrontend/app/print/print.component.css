@@ -1,0 +1,44 @@
+table{
+    text-align: center;
+}
+* {box-sizing: border-box}
+
+
+/* Set a style for all buttons */
+button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 14px 20px;
+  margin-left: 40%;
+  border: none;
+  cursor: pointer;
+  align-content: center;
+  width: 20%;
+}
+
+button:hover {
+  opacity:1;
+}
+
+
+/* Add padding to container elements */
+.row {
+  padding: 16px;
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.icon{
+  width: 50%;
+  height: 100%;
+  float: right;
+  padding: 16px;
+}
+.icon1{
+  width: 40%;
+  height: 40%;
+  margin-left: 25%;
+  margin-top: 15%;
+  
+}

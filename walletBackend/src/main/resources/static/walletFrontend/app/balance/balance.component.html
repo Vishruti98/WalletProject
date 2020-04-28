@@ -1,0 +1,35 @@
+<br><br>
+<div>
+<div class="container">
+  <form [formGroup]="balanceForm" (ngSubmit)="balance()" class='card p-3 bg-light' style="border:1px solid #ccc">
+    <h1>Account Balance</h1>
+    <p>Please fill in this form to know your balance details.</p>
+    <hr><br>
+    <div class="form-group">
+      <div class="row">
+        <div class="col-lg-3 col-md-3 col-sm-3">
+          <label for="accountNumber"><b>Account Number</b></label>
+        </div>
+        <div class="col-lg-5 col-md-5 col-sm-5">
+          <input type="number" class="form-control" formControlName="accountNumber" placeholder="Account Number">
+        </div>
+        <div *ngIf="submitted && balanceForm.controls.accountNumber.errors" class="error">
+          <div class="text-danger" *ngIf="balanceForm.controls.accountNumber.errors.required">
+            <font color="red">Account Number is required..</font>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br>
+    <div class="offset-lg-4 col-lg-4 offset-md-4 col-md-4 offset-sm-4 col-sm-4">
+      <button class="btn btn-primary" type="submit">Submit</button>
+    </div>
+    <br>
+  </form>
+  <br>
+  <button class="btn btn-primary" (click)="do()" style="margin-left: 0px;">Back</button>
+</div>
+<div class="icon">
+  <img src="balance.png" alt="Deposit" class="icon1" >
+</div>
+</div>
