@@ -23,7 +23,7 @@ export class TransactionComponent implements OnInit {
       this.router.navigate(['']);
     }
     this.transactionForm=this.formBuilder.group({
-      accountNumber:['',Validators.required]
+      accountNumber:['',[Validators.required,Validators.pattern('.{5,}'),Validators.min(1)]]
     });
   }
   transaction(){

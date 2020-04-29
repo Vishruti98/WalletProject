@@ -17,6 +17,12 @@
           <div class="text-danger" *ngIf="transferForm.controls.accountNumber1.errors.required">
             <font color="red">Account Number is required..</font>
           </div>
+          <div class="text-danger" *ngIf="transferForm.controls.accountNumber1.errors.pattern">
+            <font color="red">Account Number should be of minimum 5 digits..</font>
+          </div>
+          <div class="text-danger" *ngIf="transferForm.controls.accountNumber1.errors.min">
+            <font color="red">Account Number cannot be negative..</font>
+          </div>
         </div>
       </div>
     </div>
@@ -52,6 +58,12 @@
         <div *ngIf="submitted && transferForm.controls.accountNumber.errors" class="error">
           <div class="text-danger" *ngIf="transferForm.controls.accountNumber.errors.required">
             <font color="red">Account Number is required..</font>
+          </div>
+          <div class="text-danger" *ngIf="transferForm.controls.accountNumber.errors.pattern">
+            <font color="red">Account Number should be of minimum 5 digits..</font>
+          </div>
+          <div class="text-danger" *ngIf="transferForm.controls.accountNumber.errors.min">
+            <font color="red">Account Number cannot be negative..</font>
           </div>
         </div>
       </div>

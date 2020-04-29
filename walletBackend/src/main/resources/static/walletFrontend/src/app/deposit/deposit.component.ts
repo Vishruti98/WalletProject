@@ -19,7 +19,7 @@ export class DepositComponent implements OnInit {
 
   ngOnInit() {
     this.depositForm=this.formBuilder.group({
-      accountNumber:['',Validators.required],
+      accountNumber:['',[Validators.required,Validators.pattern('.{5,}'),Validators.min(1)]],
       balance:['',[Validators.required,Validators.min(1)]]
     });
   }

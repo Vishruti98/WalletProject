@@ -17,6 +17,12 @@
           <div class="text-danger" *ngIf="withdrawForm.controls.accountNumber.errors.required">
            <font color="red"> Account Number is required..</font>
           </div>
+          <div class="text-danger" *ngIf="withdrawForm.controls.accountNumber.errors.pattern">
+            <font color="red">Account Number should be of minimum 5 digits..</font>
+          </div>
+          <div class="text-danger" *ngIf="withdrawForm.controls.accountNumber.errors.min">
+            <font color="red">Account Number cannot be negative..</font>
+          </div>
         </div>
       </div>
     </div>

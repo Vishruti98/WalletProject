@@ -3,6 +3,8 @@ import { WalletService } from '../wallet.service';
 import { Wallet } from '../wallet';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CustomValidators } from '../custom-validators';
+import { CustomValidator2 } from '../custom-validator2';
 
 @Component({
   selector: 'app-signup',
@@ -22,9 +24,26 @@ export class SignupComponent implements OnInit {
 
   ngOnInit() {
     this.createForm=this.formBuilder.group({
-      username:['',[Validators.required,Validators.pattern("[A-Za-z]{2,32}")]],
-      password:['',Validators.required],
-      phoneNumber:['',[Validators.required, Validators.pattern("^((\\+91-?)|0)?[0-9]{10}$")]]
+      username:['',Validators.compose([
+        Validators.required,
+        CustomValidator2.patternValidator(/\d/,{ hasNumber: true }),
+        CustomValidators.patternValidator(/^([A-Z][a-z]((\s[A-Za-z])?[a-z])*)$/,{ hasCapitalCase: true}),
+        CustomValidator2.patternValidator(/[?=.*!@#$%^&*()]/,{ hasSpecialCharacters: true}),
+        ])],
+      password:['',Validators.compose([
+        Validators.required,
+        CustomValidators.patternValidator(/\d/,{ hasNumber: true }),
+        CustomValidators.patternValidator(/[A-Z]/,{ hasCapitalCase: true}),
+        CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true}),
+        CustomValidators.patternValidator(/[?=.*!@#$%^&*()]/,{ hasSpecialCharacters: true}),
+        Validators.minLength(8)])],
+      phoneNumber:['',Validators.compose([
+        Validators.required,
+        Validators.maxLength(10),
+        CustomValidators.patternValidator(/[6-9][0-9]{9}/,{ hasPattern: true }),
+        CustomValidator2.patternValidator(/[A-Za-z]/,{ hasLetters: true}),
+        CustomValidator2.patternValidator(/[?=.*!@#$%^&*()]/,{ hasSpecialCharacters: true}),
+        ])]
     });
   }
 

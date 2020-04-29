@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { WalletService } from '../wallet.service';
 import { Router } from '@angular/router';
+import { CustomValidators } from '../custom-validators';
 
 @Component({
   selector: 'app-login',
@@ -26,8 +27,14 @@ export class LoginComponent implements OnInit {
       localStorage.removeItem("accountNumber");
     }
     this.loginForm=this.formBuilder.group({
-      accountNumber:['',Validators.required],
-      password:['',Validators.required],
+      accountNumber:['',[Validators.required,Validators.pattern('.{5,}'),Validators.min(1)]],
+      password:['',Validators.compose([
+        Validators.required,
+        CustomValidators.patternValidator(/\d/,{ hasNumber: true }),
+        CustomValidators.patternValidator(/[A-Z]/,{ hasCapitalCase: true}),
+        CustomValidators.patternValidator(/[a-z]/, { hasSmallCase: true}),
+        CustomValidators.patternValidator(/[?=.*!@#$%^&*()]/,{ hasSpecialCharacters: true}),
+        Validators.minLength(8)])]
     });
   }
 

@@ -16,6 +16,12 @@
           <div class="text-danger" *ngIf="loginForm.controls.accountNumber.errors.required">
             <font color="red">Account Number is required..</font>
           </div>
+          <div class="text-danger" *ngIf="loginForm.controls.accountNumber.errors.pattern">
+            <font color="red">Account Number should be of minimum 5 digits..</font>
+          </div>
+          <div class="text-danger" *ngIf="loginForm.controls.accountNumber.errors.min">
+            <font color="red">Account Number cannot be negative..</font>
+          </div>
         </div>
       </div>
     </div>
@@ -31,6 +37,21 @@
         <div *ngIf="submitted && loginForm.controls.password.errors" class="error">
           <div class="text-danger" *ngIf="loginForm.controls.password.errors.required">
             <font color="red">Password is required..</font>
+          </div>
+          <div class="text-danger" *ngIf="loginForm.controls.password.errors.minlength">
+            <font color="red">Password must be atleast 8 digits long..</font>
+          </div>
+          <div class="text-danger" *ngIf="loginForm.controls.password.errors.hasNumber">
+            <font color="red">Password must contain at least 1 number ..</font>
+          </div>
+          <div class="text-danger" *ngIf="loginForm.controls.password.errors.hasSpecialCharacters">
+            <font color="red">Password must contain at least 1 Special Character ..</font>
+          </div>
+          <div class="text-danger" *ngIf="loginForm.controls.password.errors.hasSmallCase">
+            <font color="red">Password must contain at least 1 Letter in Small Case ..</font>
+          </div>
+          <div class="text-danger" *ngIf="loginForm.controls.password.errors.hasCapitalCase">
+            <font color="red">Password must contain at least 1 Letter in Capital ..</font>
           </div>
         </div>
       </div>

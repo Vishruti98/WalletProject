@@ -19,7 +19,7 @@ export class BalanceComponent implements OnInit {
 
   ngOnInit() {
     this.balanceForm=this.formBuilder.group({
-      accountNumber:['',Validators.required]
+      accountNumber:['',[Validators.required,Validators.pattern('.{5,}'),Validators.min(1)]]
     });
   }
   balance(){
