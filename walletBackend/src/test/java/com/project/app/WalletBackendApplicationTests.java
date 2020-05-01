@@ -6,6 +6,8 @@ import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
@@ -13,6 +15,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.project.app.dao.Dao;
 import com.project.app.entities.Wallet;
+
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @Transactional
@@ -22,6 +25,7 @@ class WalletBackendApplicationTests {
 	
 	@Autowired
 	private Dao dao;
+	Logger logger=LoggerFactory.getLogger(WalletBackendApplicationTests.class);
 
 	@Test
 	@Rollback(true)
@@ -32,13 +36,14 @@ class WalletBackendApplicationTests {
 		wallet.setPhoneNumber("8765376287");
 
 		int account = dao.createUser(wallet);
-		System.out.println("Created");
-		System.out.println(wallet.getBalance());
 		Wallet sample = dao.getUserById(account);
-		System.out.println(sample.getBalance());
+		
 		assertThat(wallet.getUsername()).isEqualTo(sample.getUsername());	
 		assertThat(wallet.getPassword()).isEqualTo(sample.getPassword());
 		assertThat(wallet.getBalance()).isEqualTo(sample.getBalance());
+		
+
+		logger.info("Account Creation Tested Successfully");
 		}
 	
 	@Test
@@ -49,7 +54,8 @@ class WalletBackendApplicationTests {
 		System.out.println(wallet.getPassword());
 		assertThat(wallet.getUsername()).isEqualTo("Ram");
 		assertThat(wallet.getPassword()).isEqualTo("JaiShriRam@1223");
-		//assertThat(wallet.getBalance()).isEqualTo(sample.getBalance());
+
+		logger.info("Account Details Extraction Tested Successfully");
 		}
 	
 	@Test
@@ -67,11 +73,13 @@ class WalletBackendApplicationTests {
 		dao.deposit(account, amount);
 		assertThat(wallet.getBalance()).isEqualTo(retrieve.getBalance());
 		assertThat(retrieve.getBalance()).isEqualTo(200);
+		logger.info("Deposit Tested Successfully");
 		
 		double withdrawAmount=20;
 		dao.withdraw(account, withdrawAmount);
 		assertThat(wallet.getBalance()).isEqualTo(retrieve.getBalance());
 		assertThat(retrieve.getBalance()).isEqualTo(180);
+		logger.info("Deposit Tested Successfully");
 		}
 	
 	@Test
@@ -103,6 +111,7 @@ class WalletBackendApplicationTests {
 		dao.transfer(100, account1, account);
 		assertThat(retrieve.getBalance()).isEqualTo(100);
 		assertThat(retrieve1.getBalance()).isEqualTo(600);
+		logger.info("Transfer Money Tested Successfully");
 		}
 
 

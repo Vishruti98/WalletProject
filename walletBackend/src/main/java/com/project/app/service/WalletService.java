@@ -22,5 +22,4 @@ public interface WalletService {
 
 	public boolean validatePassword(String pass, int acc);
 
-	public boolean validateAccount(int account);
 }

@@ -20,8 +20,6 @@ public interface Dao {
 
 	public List<Transaction> transactionHistory(int accountNumber);
 
-	public boolean validateAccount(int account);
-
 	public boolean validatePassword(String pass, int account);
 
 }
