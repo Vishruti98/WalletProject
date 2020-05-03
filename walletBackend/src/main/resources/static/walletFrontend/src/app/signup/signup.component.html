@@ -102,4 +102,7 @@
 
 <div [hidden]="!check">
   <h4>You have successfully submitted !</h4> 
+  <h4>Your Account Number is generated as <font color="blue">{{result?.accountNumber}} </font></h4> 
+  <h4>Kindly, use this to login to your account</h4>
+  <button class="btn btn-primary" (click)="do()" style="margin-left: 0px;">LOGIN</button>
 </div>

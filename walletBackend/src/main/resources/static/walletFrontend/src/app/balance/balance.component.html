@@ -32,6 +32,10 @@
     </div>
     <br>
   </form>
+  
+<div [hidden]="check">
+  <h4>Your bank balance is <font color="blue"> &#8377; {{result?.balance}}/- </font></h4> 
+</div>
   <br>
   <button class="btn btn-primary" (click)="do()" style="margin-left: 0px;">Back</button>
 </div>

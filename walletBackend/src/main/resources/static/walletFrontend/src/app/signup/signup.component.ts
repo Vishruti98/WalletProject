@@ -19,6 +19,7 @@ export class SignupComponent implements OnInit {
   createForm: FormGroup;
   msg1:boolean;
   message:any;
+  result:any;
 
   constructor(private formBuilder: FormBuilder,private walletService:WalletService,private router: Router) { }
 
@@ -65,10 +66,10 @@ export class SignupComponent implements OnInit {
         console.log(data);
         this.wallet=new Wallet();
         this.message=data;
-        
-            alert("Account Number generated as: "+this.message);
+        this.transaction1();
+            //alert("Account Number generated as: "+this.message);
             
-            this.router.navigate(['new-login']);
+            //this.router.navigate(['new-login']);
       },
       err => 
       { console.log(err.stack);
@@ -76,8 +77,21 @@ export class SignupComponent implements OnInit {
     }
   }
 
+  transaction1(){
+    this.walletService.getUserById(this.message).subscribe(data => {
+      this.result=data;
+      console.log(this.result);
+    },
+    err =>{
+      console.log(err.stack);
+    })
+  }
+
+  do(){
+    this.router.navigate(['new-login']);
+  }
+
   onSubmit(){ 
-    
     this.save();
   } 
 

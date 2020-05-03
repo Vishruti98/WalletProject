@@ -15,12 +15,15 @@ export class BalanceComponent implements OnInit {
   msg1:any;
   message:any;
   errormsg:string;
+  result:any;
+  check: boolean=true;
   constructor(private formBuilder: FormBuilder,private walletService:WalletService,private router: Router) { }
 
   ngOnInit() {
     this.balanceForm=this.formBuilder.group({
       accountNumber:['',[Validators.required,Validators.pattern('.{5,}'),Validators.min(1)]]
     });
+    
   }
   balance(){
     this.submitted=true;
@@ -36,8 +39,13 @@ export class BalanceComponent implements OnInit {
         {
       this.walletService.showBalance(accNo1).subscribe(data2 => {
         this.message=data2;
-        alert("Rs."+this.message);
-        this.router.navigate(['new-options']);
+        //alert("Rs."+this.message);
+        if(this.submitted==true)
+        {
+          this.check=false;
+          this.transaction1();
+        }
+        // this.router.navigate(['new-options']);
       },
       err=>{
         console.log(err.stack);
@@ -53,9 +61,17 @@ export class BalanceComponent implements OnInit {
     });
     }
   }
+  
+  transaction1(){
+    this.walletService.getUserById(localStorage.accountNumber).subscribe(data => {
+      this.result=data;
+    },
+    err =>{
+      console.log(err.stack);
+    })
+  }
 
   do(){
-    
     this.router.navigate(['new-options']);
   }
 
