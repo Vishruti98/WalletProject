@@ -12,7 +12,7 @@ import { TransferComponent } from './transfer/transfer.component';
 import { BalanceComponent } from './balance/balance.component';
 import { TransactionComponent } from './transaction/transaction.component';
 import { HttpClientModule } from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule} from '@angular/forms';
 import { PrintComponent } from './print/print.component';
 
 @NgModule({
@@ -31,8 +31,7 @@ import { PrintComponent } from './print/print.component';
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule, 
     HttpClientModule,
     RouterModule.forRoot([
       {
@@ -76,8 +75,7 @@ import { PrintComponent } from './print/print.component';
         path: 'new-print',
         component: PrintComponent
       }
-   ]
-   )
+   ])
   ],
   providers: [],
   bootstrap: [AppComponent]

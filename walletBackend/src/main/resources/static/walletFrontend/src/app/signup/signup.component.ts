@@ -63,13 +63,10 @@ export class SignupComponent implements OnInit {
       this.check=true;
     this.walletService.create(this.wallet).subscribe(data => 
       {
-        console.log(data);
         this.wallet=new Wallet();
         this.message=data;
         this.transaction1();
-            //alert("Account Number generated as: "+this.message);
-            
-            //this.router.navigate(['new-login']);
+          
       },
       err => 
       { console.log(err.stack);
@@ -91,6 +88,7 @@ export class SignupComponent implements OnInit {
     this.router.navigate(['new-login']);
   }
 
+  //on submitting the form this method is called
   onSubmit(){ 
     this.save();
   } 
