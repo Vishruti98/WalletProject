@@ -163,8 +163,8 @@ public class DaoImpl implements Dao {
 		logger.trace("Transfer is accessed  at DAO layer");
 		Wallet wallet = em.find(Wallet.class, acc2);
 		recipient = em.find(Wallet.class, acc1);
-
-		if (recipient != null) {
+		try {
+		if (recipient != null && wallet!=null) {
 			tr = new Transaction();
 			tr1 = new Transaction();
 
@@ -200,6 +200,16 @@ public class DaoImpl implements Dao {
 				tr1.setTId(count + counts + 1);
 
 		}
+		else {
+			throw new InvalidLoginException("Account Details Not Correctly Entered");
+		}
+		}
+		catch(Exception e)
+		{
+			logger.error("InvalidLoginException thrown by validate method");
+			throw new InvalidLoginException("Account Details Not Correctly Entered");
+		}
+		
 
 		em.merge(tr1);
 		logger.info("Transfer successful");

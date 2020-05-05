@@ -1,7 +1,6 @@
 package com.project.app;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import javax.transaction.Transactional;
 
@@ -29,6 +28,7 @@ class WalletBackendServiceTest {
 	@Test
 	@Rollback(true)
 	public void testcreateWallet() {
+		logger.trace("Craetion Testing Started");
 		Wallet wallet = new Wallet();
 		wallet.setUsername("Vishruti");
 		wallet.setPassword("Vishruti@123");
@@ -48,18 +48,41 @@ class WalletBackendServiceTest {
 	@Test
 	@Rollback(true)
 	public void testgetUserById() {
-		Wallet wallet = service.getUserById(10030);
-		System.out.println(wallet.getUsername());
-		System.out.println(wallet.getPassword());
-		assertThat(wallet.getUsername()).isEqualTo("Vishruti Malviya");
-		assertThat(wallet.getPassword()).isEqualTo("Vish@123");
+		logger.trace("User Testing Started");
+		boolean check = false;
+		String message = null;
+		Wallet wallet = service.getUserById(10010);
+		if (wallet == null) {
+			try {}
+			catch (Exception e) {
+				message = e.getMessage();
+				assertThat(message).isEqualTo(null);
+			}
+		}
 
+		else {
+			try {
+				check = service.validatePassword("Vishruti", wallet.getAccountNumber());
+			} catch (Exception e) {
+				message = e.getMessage();
+				assertThat("Account Details not entered correctly").isEqualTo(message);
+			}
+
+			try {
+				check = service.validatePassword(wallet.getPassword(), wallet.getAccountNumber());
+			} catch (Exception e) {
+				message = e.getMessage();
+				assertThat(true).isEqualTo(check);
+			}
+			
+		}
 		logger.info("Account Details Extraction Tested Successfully");
 		}
 	
 	@Test
 	@Rollback(true)
 	public void testDepositAndWithdrawMoney() {
+		String message=null;
 		Wallet wallet = new Wallet();
 		wallet.setUsername("Vishruti");
 		wallet.setPassword("Vishruti@123");
@@ -68,22 +91,42 @@ class WalletBackendServiceTest {
 		int account = service.create(wallet);
 		Wallet retrieve = service.getUserById(account);
 		
+		logger.trace("Depsoit Testing Started");
 		double amount=200;
 		service.deposit(account, amount);
 		assertThat(wallet.getBalance()).isEqualTo(retrieve.getBalance());
 		assertThat(retrieve.getBalance()).isEqualTo(200);
 		logger.info("Deposit Tested Successfully");
 		
-		double withdrawAmount=20;
+		logger.trace("Withdraw Testing Started");
+		double withdrawAmount;
+		try {
+			 withdrawAmount=2000;
 		service.withdraw(account, withdrawAmount);
+		}
+		catch(Exception e)
+		{
+			message=e.getMessage();
+		}
+		assertThat("Sorry! Insufficient Balance").isEqualTo(message);
+		
+		try {
+			 withdrawAmount=20;
+		service.withdraw(account, withdrawAmount);
+		}
+		catch(Exception e)
+		{
+			message=e.getMessage();
+		}
 		assertThat(wallet.getBalance()).isEqualTo(retrieve.getBalance());
 		assertThat(retrieve.getBalance()).isEqualTo(180);
-		logger.info("Deposit Tested Successfully");
+		logger.info("Witdraw Tested Successfully");
 		}
 	
 	@Test
 	@Rollback(true)
 	public void testTransferMoney() {
+		String message=null;
 		Wallet wallet = new Wallet();
 		wallet.setUsername("Vishruti");
 		wallet.setPassword("Vishruti@123");
@@ -107,7 +150,25 @@ class WalletBackendServiceTest {
 		double amount1=500;
 		service.deposit(account1, amount1);
 		
-		service.transfer(100, account1, account);
+		logger.trace("Transfer Testing Started");		
+		
+		try {
+			service.transfer(1000, account1, account);
+		}
+		catch(Exception e)
+		{
+			message=e.getMessage();
+		}
+		assertThat("Sorry! Insufficient Balance").isEqualTo(message);
+		
+		try {
+			service.transfer(100, account1, account);
+		}
+		catch(Exception e)
+		{
+			message=e.getMessage();
+		}
+			
 		assertThat(retrieve.getBalance()).isEqualTo(100);
 		assertThat(retrieve1.getBalance()).isEqualTo(600);
 		logger.info("Transfer Money Tested Successfully");

@@ -13,6 +13,7 @@ import com.project.app.dao.DaoImpl;
 import com.project.app.entities.Transaction;
 import com.project.app.entities.Wallet;
 import com.project.app.exceptions.InsufficientBalanceException;
+import com.project.app.exceptions.InvalidLoginException;
 
 @Service
 @Transactional
@@ -127,9 +128,13 @@ public class ServiceImpl implements WalletService {
 		else
 			return dao.transfer(amount, acc1, acc2);
 		}
-		catch(Exception e){
+		catch(InsufficientBalanceException e){
 			logger.error("InsufficientBalanceException thrown by validate method");
 			throw new InsufficientBalanceException("Sorry! Insufficient Balance");
+		}
+		catch(Exception e){
+			logger.error("Invalid details thrown by validate method");
+			throw new InvalidLoginException("Sorry! Invalid Details");
 		}
 
 	}
