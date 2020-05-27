@@ -14,7 +14,7 @@
           <label for="username"><b>Username</b></label>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-5">
-          <input type="text" class="form-control" placeholder="Enter Username" formControlName="username" [(ngModel)]="wallet.username">
+          <input type="text" class="form-control" placeholder="Enter Username" formControlName="username" >
         </div>
         <div *ngIf="submitted && createForm.controls.username.errors" class="error">
           <div class="text-danger" *ngIf="createForm.controls.username.errors.required">
@@ -40,7 +40,7 @@
           <label for="password"><b>Password</b></label>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-5">
-          <input type="password" class="form-control" placeholder="Enter Password" formControlName="password" [(ngModel)]="wallet.password">
+          <input type="password" class="form-control" placeholder="Enter Password" formControlName="password">
         </div>
         <div *ngIf="submitted && createForm.controls.password.errors" class="error">
           <div class="text-danger" *ngIf="createForm.controls.password.errors.required">
@@ -72,7 +72,7 @@
           <label for="phoneNumber"><b>Phone Number</b></label>
         </div>
         <div class="col-lg-5 col-md-5 col-sm-5">
-          <input type="tel" class="form-control" placeholder="Enter Phone Number" formControlName="phoneNumber" [(ngModel)]="wallet.phoneNumber">
+          <input type="tel" class="form-control" placeholder="Enter Phone Number" formControlName="phoneNumber">
         </div>
         <div *ngIf="submitted && createForm.controls.phoneNumber.errors" class="error">
           <div class="text-danger" *ngIf="createForm.controls.phoneNumber.errors.required">

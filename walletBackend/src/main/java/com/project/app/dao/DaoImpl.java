@@ -117,7 +117,7 @@ public class DaoImpl implements Dao {
 
 		em.persist(tr);
 		logger.info("Deposit successful");
-		return tr;
+		return tr; 
 	}
 	
 	/**
@@ -214,7 +214,7 @@ public class DaoImpl implements Dao {
 		em.merge(tr1);
 		logger.info("Transfer successful");
 		return tr;
-	}
+	} 
 
 	/**
 	This method is used to print Transaction History of Account Holder

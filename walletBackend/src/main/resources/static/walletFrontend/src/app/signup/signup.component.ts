@@ -13,7 +13,6 @@ import { CustomValidator2 } from '../custom-validator2';
 })
 export class SignupComponent implements OnInit {
 
-  wallet: Wallet=new Wallet();
   submitted=false;
   check=false;
   createForm: FormGroup;
@@ -48,10 +47,6 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  newWallet(): void{
-    this.submitted=false;
-    this.wallet=new Wallet();
-  }
 
   save(){
     this.submitted=true;
@@ -61,9 +56,9 @@ export class SignupComponent implements OnInit {
     }
     else{
       this.check=true;
-    this.walletService.create(this.wallet).subscribe(data => 
+    this.walletService.create(this.createForm.value).subscribe(data => 
       {
-        this.wallet=new Wallet();
+        
         this.message=data;
         this.transaction1();
           
